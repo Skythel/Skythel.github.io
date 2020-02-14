@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap');
+body,html {
+	font-size: 120%;
+    font-family: 'Patrick Hand', cursive;
+    height: 100%;
+    padding: none;
+    display: grid;
+    overflow: hidden;
+    background: rebeccapurple;
+}
+main {
+    margin: auto;
+    background: white;
+    height: auto;
+    padding: 2.5em;
+    border-radius: 2em;
+}
+input,button {
+    transition: 0.5s;
+    border: 0.1em solid black;
+    padding: 0.2em;
+    background: linear-gradient(lightgrey,white);
+    font-family: 'Patrick Hand', cursive;
+    font-size: 85%;
+}
+input:focus,button:focus {
+    box-shadow: 0 0 0.5em purple;
+}
+#text {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+.meowy {
+    font-weight: bold;
+}
