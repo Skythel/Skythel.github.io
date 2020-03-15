@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Skynet's Amazing Raid Sorting Hat</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="icons.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <p>Skynet's Amazing Raid Sorting Hat</p>
+
+    <button id="sort" onclick="sTable()">Toggle Lineup View</button>
+    <!-- <button id="sort" onclick="sort()">Sorting Hat</button> -->
+
+    <pre id="content" style="white-space: pre-wrap;"></pre>
+    <div id="sorting" style="display:none">      
+        <table id="slot1c">
+            <th>Friday 8AM</th>
+            <tr><td>Main Tank</td><td class='pMain'></td></tr>
+            <tr><td>Off Tank</td><td class='pOff'></td></tr>
+            <tr><td>Heal 1</td><td class='pH1'></td></tr>
+            <tr><td>Heal 2</td><td class='pH2'></td></tr>
+            <tr><td>LM</td><td class='pLM'></td></tr>
+            <tr><td>Burg</td><td class='pBurg'></td></tr>
+            <tr><td>Red Cpt</td><td class='pRcpt'></td></tr>
+            <tr><td>DPS 1</td><td class='pDPS1'></td></tr>
+            <tr><td>DPS 2</td><td class='pDPS2'></td></tr>
+            <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
+            <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
+            <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+        </table>
+        <table id="slot2c">
+            <th>Friday 8PM</th>
+            <tr><td>Main Tank</td><td class='pMain'></td></tr>
+            <tr><td>Off Tank</td><td class='pOff'></td></tr>
+            <tr><td>Heal 1</td><td class='pH1'></td></tr>
+            <tr><td>Heal 2</td><td class='pH2'></td></tr>
+            <tr><td>LM</td><td class='pLM'></td></tr>
+            <tr><td>Burg</td><td class='pBurg'></td></tr>
+            <tr><td>Red Cpt</td><td class='pRcpt'></td></tr>
+            <tr><td>DPS 1</td><td class='pDPS1'></td></tr>
+            <tr><td>DPS 2</td><td class='pDPS2'></td></tr>
+            <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
+            <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
+            <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+        </table>
+        <table id="slot3c">
+            <th>Saturday 8AM</th>
+            <tr><td>Main Tank</td><td class='pMain'></td></tr>
+            <tr><td>Off Tank</td><td class='pOff'></td></tr>
+            <tr><td>Heal 1</td><td class='pH1'></td></tr>
+            <tr><td>Heal 2</td><td class='pH2'></td></tr>
+            <tr><td>LM</td><td class='pLM'></td></tr>
+            <tr><td>Burg</td><td class='pBurg'></td></tr>
+            <tr><td>Red Cpt</td><td class='pRcpt'></td></tr>
+            <tr><td>DPS 1</td><td class='pDPS1'></td></tr>
+            <tr><td>DPS 2</td><td class='pDPS2'></td></tr>
+            <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
+            <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
+            <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+        </table>
+        <table id="slot4c">
+            <th>Saturday 8PM</th>
+            <tr><td>Main Tank</td><td class='pMain'></td></tr>
+            <tr><td>Off Tank</td><td class='pOff'></td></tr>
+            <tr><td>Heal 1</td><td class='pH1'></td></tr>
+            <tr><td>Heal 2</td><td class='pH2'></td></tr>
+            <tr><td>LM</td><td class='pLM'></td></tr>
+            <tr><td>Burg</td><td class='pBurg'></td></tr>
+            <tr><td>Red Cpt</td><td class='pRcpt'></td></tr>
+            <tr><td>DPS 1</td><td class='pDPS1'></td></tr>
+            <tr><td>DPS 2</td><td class='pDPS2'></td></tr>
+            <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
+            <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
+            <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+        </table>
+        <table id="slot5c">
+            <th>Sunday 8AM</th>
+            <tr><td>Main Tank</td><td class='pMain'></td></tr>
+            <tr><td>Off Tank</td><td class='pOff'></td></tr>
+            <tr><td>Heal 1</td><td class='pH1'></td></tr>
+            <tr><td>Heal 2</td><td class='pH2'></td></tr>
+            <tr><td>LM</td><td class='pLM'></td></tr>
+            <tr><td>Burg</td><td class='pBurg'></td></tr>
+            <tr><td>Red Cpt</td><td class='pRcpt'></td></tr>
+            <tr><td>DPS 1</td><td class='pDPS1'></td></tr>
+            <tr><td>DPS 2</td><td class='pDPS2'></td></tr>
+            <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
+            <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
+            <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+        </table>
+    </div>
+    <div id="container"></div>
+
+    <script type="text/javascript">
+    function sTable() {
+        if(document.getElementById("sorting").style.display=="none") {
+            document.getElementById("sorting").style.display = "block";
+        }
+        else {
+            document.getElementById("sorting").style.display = "none";
+        }
+    }
+      // Client ID and API key from the Developer Console
+      var CLIENT_ID = '1042370824090-qdt1gct9ftvj4plr2c7lfvmmu1oaq3fp.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyDY8kJ3xKXzza30uBFkJG4FIuJqTbpqLng';
+
+      // Array of API discovery doc URLs for APIs used by the quickstart
+      var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+
+      // Authorization scopes required by the API; multiple scopes can be
+      // included, separated by spaces.
+      var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+
+      /**
+       *  On load, called to load the auth2 library and API client library.
+       */
+      function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+
+      /**
+       *  Initializes the API client library and sets up sign-in state
+       *  listeners.
+       */
+      function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () { // we dont need no sign ins!
+          skynetMagic();
+        }, function(error) {
+          appendPre(JSON.stringify(error, null, 2));
+        });
+      }
+
+      /**
+       * Append a pre element to the body containing the given message
+       * as its text node. Used to display the results of the API call.
+       *
+       * @param {string} message Text to be placed in pre element.
+       */
+      function appendPre(message) {
+        var pre = document.getElementById('content');
+        var textContent = document.createTextNode(message + '\n');
+        pre.appendChild(textContent);
+      }
+
+      function appendHtml(message) {
+        var div = document.getElementById('container');
+        div.innerHTML += message;
+      }
+
+    function skynetMagic() {
+        gapi.client.sheets.spreadsheets.values.get({
+          spreadsheetId: '1AILw6loWKRDATyoPbAulLC4fm1HeuA4eelQ5rCfsNXw',
+          range: 'A2:E'
+        }).then(function(response) {
+          var range = response.result;
+          if (range.values.length > 0) {
+            output = '<table><tr>'+
+            '<th>No.</th><th>Timestamp</th><th>Name</th><th>Timeslots</th><th>Roles</th><th>Classes</th><th>Info</th>'+
+            '</tr>';
+            for (i = 0; i < range.values.length; i++) {
+              var row = range.values[i];
+              var col = (i%2) ? '#eee' : '#fff';
+              output += '<tr class="tr0" style="background:'+col+'"><td>'+(i+1)+'</td><td>'+row[0]+
+              outputRow(row,i)+
+              '</td></tr>';
+            }
+            output += '</table>';
+            appendHtml(output);
+            sort();
+          } else {
+            appendPre('No data found.');
+          }
+        }, function(response) {
+          appendPre('Error: ' + response.result.error.message);
+        });
+      }
+
+    function outputRow(data,id) { // processing data
+        output = "";
+        misc = "";
+        // name 
+        output += '</td><td>'+data[1];
+        // timeslots
+        array = data[2].split(", ");
+        output += "</td><td> ";
+        for(var i=0; i<array.length; i++) {
+            switch(array[i]) {
+                case "Friday 8:00 AM":
+                    output += "<div class=\"fri8am tip\" onclick=\"add(1,id)\"><span>Friday 8AM</span></div>";
+                    break;
+                case "Friday 8:00 PM":
+                    output += "<div class=\"fri8pm tip\" onclick=\"add(2,id)\"><span>Friday 8PM</span></div>";
+                    break;
+                case "Saturday 8:00 AM":
+                    output += "<div class=\"sat8am tip\" onclick=\"add(3,id)\"><span>Saturday 8AM</span></div>";
+                    break;
+                case "Saturday 8:00 PM":
+                    output += "<div class=\"sat8pm tip\" onclick=\"add(4,id)\"><span>Saturday 8PM</span></div>";
+                    break;
+                case "Sunday 8:00 AM":
+                    output += "<div class=\"sun8am tip\" onclick=\"add(5,id)\"><span>Sunday 8AM</span></div>";
+                    break;
+                default: 
+                    misc += "[Timeslot: "+array[i]+"]";
+            }
+        }
+        // roles
+        array = data[3].split(", ");
+        output += "</td><td> ";
+        for(var i=0; i<array.length; i++) {
+            switch(array[i]) {
+                case "DPS":
+                    output += "<div class=\"dps tip\"><span>DPS</span></div>";
+                    break;
+                case "Support":
+                    output += "<div class=\"support tip\"><span>Support</span></div>";
+                    break;
+                case "Heals":
+                    output += "<div class=\"heals tip\"><span>Heals</span></div>";
+                    break;
+                case "Tank":
+                    output += "<div class=\"tank tip\"><span>Tank</span></div>";
+                    break;
+                default: 
+                    misc += "[Role: "+array[i]+"]";
+            }            
+        }
+        // classes
+        array = data[4].split(", ");
+        output += "</td><td> ";
+        for(var i=0; i<array.length; i++) {
+            switch(array[i]) {
+                case "Beorning":
+                    output += "<div class=\"beorning tip\"><span>Beorning</span></div> ";
+                    break;
+                case "Burglar":
+                    output += "<div class=\"burg tip\"><span>Burglar</span></div> ";
+                    break;
+                case "Captain":
+                    output += "<div class=\"cpt tip\"><span>Captain</span></div> ";
+                    break;
+                case "Champion":
+                    output += "<div class=\"champ tip\"><span>Champion</span></div> ";
+                    break;
+                case "Guardian":
+                    output += "<div class=\"guard tip\"><span>Guardian</span></div> ";
+                    break;
+                case "Hunter":
+                    output += "<div class=\"hunt tip\"><span>Hunter</span></div> ";
+                    break;
+                case "Lore Master":
+                    output += "<div class=\"lm tip\"><span>Lore Master</span></div> ";
+                    break;
+                case "Minstrel":
+                    output += "<div class=\"mini tip\"><span>Minstrel</span></div> ";
+                    break;
+                case "Rune Keeper":
+                    output += "<div class=\"rk tip\"><span>Rune Keeper</span></div> ";
+                    break;
+                case "Warden":
+                    output += "<div class=\"warden tip\"><span>Warden</span></div> ";
+                    break;
+                default: 
+                    misc += "[Class: "+array[i]+"]";
+            }
+        }
+        output += "</td><td>";
+        // misc
+        if(misc!="") {
+            output += "<div class=\"notice tip tipleft\"><span>"+misc+"</span></div>"
+        }
+        
+        return output;
+    }
+        
+    function sort() {
+        // create vars
+        const slot1=new Array(12),slot2=new Array(12),slot3=new Array(12),slot4=new Array(12),slot5=new Array(12);
+        const nameA = [];
+        const slotsA = [];
+        const rolesA = [];
+        const classesA = [];
+        // add them all to array
+        for(var i=1; i<document.getElementsByClassName("tr0").length; i++) {
+            // set vars
+            var parent = document.getElementsByClassName("tr0")[i];
+            var name = parent.getElementsByTagName("td")[2].innerHTML.split(/\/| /)[0];
+            const slots = [];
+            const roles = [];
+            const classes = [];
+            for(var e=3; e<6; e++) {
+                for(var j=0; j<parent.getElementsByTagName("td")[e].getElementsByTagName("div").length; j++) {
+                    if(e==3) {
+                        slots.push(parent.getElementsByTagName("td")[e].getElementsByTagName("div")[j].getElementsByTagName("span")[0].innerHTML);
+                    }
+                    else if(e==4) {
+                        roles.push(parent.getElementsByTagName("td")[e].getElementsByTagName("div")[j].getElementsByTagName("span")[0].innerHTML);
+                    }
+                    else {
+                        classes.push(parent.getElementsByTagName("td")[e].getElementsByTagName("div")[j].getElementsByTagName("span")[0].innerHTML);
+                    }
+                }
+            }
+            // add values
+            if(nameA.indexOf(name)===-1) {
+                nameA.push(name);
+                slotsA.push(slots);
+                rolesA.push(roles);
+                classesA.push(classes);
+            }
+        }
+        // create the dropdown
+        var dd = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';
+        for(var i=0; i<nameA.length; i++) {
+            dd += '<option>'+nameA[i]+'</option>';
+        }
+        dd+='</select>'; 
+        for(var i=0; i<5; i++) {
+            for(var j=1; j<13; j++) {
+                document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[j].getElementsByTagName("td")[1].innerHTML = dd;
+            }
+        }
+        // // sort on day first
+        // for(var i=0; i<slotsA.length; i++) {
+        //     if(slotsA[i].length==1) {
+        //         victim = victimise(nameA[i],rolesA[i],classesA[i]);
+        //         switch(slotsA[i][0]) {
+        //             case "Friday 8AM":
+        //                 slot1.push(victim);
+        //                 break;
+        //             case "Friday 8PM":;
+        //                 slot2.push(victim);
+        //                 break;
+        //             case "Saturday 8AM":;
+        //                 slot3.push(victim);
+        //                 break; 
+        //             case "Saturday 8PM":;
+        //                 slot4.push(victim);
+        //                 break;
+        //             case "Sunday 8AM":;
+        //                 slot5.push(victim);
+        //                 break;
+        //         }
+        //     }
+        // }
+        // for(var i=0; i<12; i++) {
+        //     document.getElementById("slot1c").getElementsByTagName("tr")[i].getElementsByTagName("td")[1] = slot1[i].name;
+        //     document.getElementById("slot2c").getElementsByTagName("tr")[1].getElementsByTagName("td")[1] = slot2[i].name;
+        //     document.getElementById("slot3c").getElementsByTagName("tr")[1].getElementsByTagName("td")[1] = slot3[i].name;
+        //     document.getElementById("slot4c").getElementsByTagName("tr")[1].getElementsByTagName("td")[1] = slot4[i].name;
+        //     document.getElementById("slot5c").getElementsByTagName("tr")[1].getElementsByTagName("td")[1] = slot5[i].name;
+        // }
+    }
+    function update() {
+        // remove selected person from other dropdowns, something ill do later
+    }
+    function add(slot) { 
+        // victim = victimise(nameA[id],rolesA[id],classesA[id]);
+        // switch(slot) {
+        //     case 1:
+        //         slot1.push(victim); 
+        //         alert(nameA[id]+"added to slot 1!");
+        //         break;
+        //     case 2: 
+        //         slot1.push(victim);
+        //         break;
+        //     case 3: 
+        //         slot1.push(victim);
+        //         break;
+        //     case 4: 
+        //         slot1.push(victim);
+        //         break;
+        //     case 5: 
+        //         slot1.push(victim);
+        //         break;
+        //     default: 
+        //         console.log("error invalid slot!");
+        // }
+        
+    }
+
+    function victimise(name,roles,classes) {
+        this.name = name;
+        this.roles = roles;
+        this.classes = classes;
+    }
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+  </body>
+</html>

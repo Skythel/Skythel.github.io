@@ -1,0 +1,35 @@
+.tip {
+    text-decoration: none;
+}
+.tip:hover {
+    cursor: help;
+    position: relative;
+}
+.tip span {
+    display: none;
+    transition: 0.5s;
+}
+.tip:hover span, .tip:active span {
+    border: #c0c0c0 1px dotted;
+    padding: 0.5em;
+    display: block;
+    z-index: 999;
+    background: #333 no-repeat 100% 5%;
+    color: white;
+    left: 0px;
+    margin: -40px 0 0 0;
+    position: absolute;
+    top: 0.2em;
+    text-decoration: none;
+    min-width: 7em;
+    text-align: center;
+}
+.tipleft:hover span, .tipleft:active span {
+    margin: -40px 0 0 -100px;
+}
+#slot1c,#slot2c,#slot3c,#slot4c,#slot5c {
+    display: inline;
+    position: center;
+    margin-left: auto;
+    margin-right: auto;
+}
