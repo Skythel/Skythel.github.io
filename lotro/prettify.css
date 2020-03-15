@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+body {
+    background: #111;
+    color: #ecf0f1;
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+}
+table {
+    background: transparent;
+    padding-top: 0.2em;
+    border: 1px solid #34495e;
+}
+td,th {
+    border-bottom: 1px solid #2980b9;
+    box-shadow: inset 0 -5px 5px -5px #2980b9;
+}
+button, select {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9em;
+}
+#victimsList {
+    padding: 0 0.1em 0.15em 0.15em;
+    border-radius: 0.1em;
+}
+tr td {
+    background: rgba(44, 62, 80, 0.5);
+    padding: 0.2em;
+    min-width: 1.5em;
+    transition: 0.5s;
+}
+.even td {
+    background: #2c3e50;
+}
+.odd td {
+    background: #34495e;
+}
+button,select {
+    background: linear-gradient(#222,#333);
+    border: 0.05em solid #f39c12;
+    color: #ecf0f1;
+    outline: none;
+    padding: 0.3em;
+    transition: 0.5s;
+}
+button:hover {
+    background: linear-gradient(#333,#222);
+}
+option {
+    background: #222;
+}
+tr:hover td {
+    background: rgba(243, 156, 18, 0.8);
+}
