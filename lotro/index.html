@@ -30,6 +30,7 @@
             <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
             <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
             <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+            <tr><td>Alternates</td><td id="a1"></td></tr>
         </table>
         <table id="slot2c">
             <th>Friday 8PM</th>
@@ -45,6 +46,7 @@
             <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
             <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
             <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+            <tr><td>Alternates</td><td id="a2"></td></tr>
         </table>
         <table id="slot3c">
             <th>Saturday 8AM</th>
@@ -60,6 +62,7 @@
             <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
             <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
             <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+            <tr><td>Alternates</td><td id="a3"></td></tr>
         </table>
         <table id="slot4c">
             <th>Saturday 8PM</th>
@@ -75,6 +78,7 @@
             <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
             <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
             <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+            <tr><td>Alternates</td><td id="a4"></td></tr>
         </table>
         <table id="slot5c">
             <th>Sunday 8AM</th>
@@ -90,6 +94,7 @@
             <tr><td>DPS 3</td><td class='pDPS3'></td></tr>
             <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
             <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
+            <tr><td>Alternates</td><td id="a5"></td></tr>
         </table>
     </div>
     <div id="container"></div>
@@ -324,10 +329,10 @@
         const ddDPS = [];
         // create the dropdowns
         for(var d=0; d<5; d++) {
-            ddTank[d] = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';
-            ddHeals[d] = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';
-            ddSupport[d] = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';
-            ddDPS[d] = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';      
+            ddTank[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
+            ddHeals[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
+            ddSupport[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
+            ddDPS[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>'; 
 
             switch(d) {
                 case 0:
@@ -353,22 +358,16 @@
                         ddTank[d] += '<option>'+nameA[i]+'</option>';
                     }
                 }
-            }
-            for(var i=0; i<nameA.length; i++) {
                 if(!(slotsA[i].indexOf(o)===-1)) {
                     if(!(rolesA[i].indexOf("Heals")===-1)) {
                         ddHeals[d] += '<option>'+nameA[i]+'</option>';
                     }
                 }
-            }
-            for(var i=0; i<nameA.length; i++) {
                 if(!(slotsA[i].indexOf(o)===-1)) {
                     if(!(rolesA[i].indexOf("Support")===-1)) {
                         ddSupport[d] += '<option>'+nameA[i]+'</option>';
                     }
                 }
-            }
-            for(var i=0; i<nameA.length; i++) {
                 if(!(slotsA[i].indexOf(o)===-1)) {
                     if(!(rolesA[i].indexOf("DPS")===-1)) {
                         ddDPS[d] += '<option>'+nameA[i]+'</option>';
@@ -438,8 +437,51 @@
         //     document.getElementById("slot5c").getElementsByTagName("tr")[1].getElementsByTagName("td")[1] = slot5[i].name;
         // }
     }
-    function update() {
+    function update(slot) {
+        const list = [];
+        const current = [];
         // remove selected person from other dropdowns, something ill do later
+        for(var i=0; i<document.getElementsByClassName("tr0").length; i++) {
+            // set vars
+            var name = document.getElementsByClassName("tr0")[i].getElementsByTagName("td")[2].innerHTML.split(/\/| /)[0];
+            switch(slot) {
+                case 0: 
+                    var c="fri8am"; break;
+                case 1: 
+                    var c="fri8pm"; break;
+                case 2: 
+                    var c="sat8am"; break;
+                case 3:
+                    var c="sat8pm"; break;
+                case 4: 
+                    var c="sun8am"; break;
+            }
+            if(document.getElementsByClassName("tr0")[i].getElementsByTagName("td")[3].getElementsByClassName(c).length > 0) { //subject to change to visibility!
+                console.log("hey there");
+                // add values
+                if(list.indexOf(name)===-1) {
+                    list.push(name);
+                }
+            }
+        }
+        // get list of ppl currently in dropdowns
+        for(var j=1; j<13; j++) {
+            var parent = document.getElementById("sorting").
+            getElementsByTagName("table")[slot].
+            getElementsByTagName("tr")[j].
+            getElementsByTagName("td")[1].
+            getElementsByTagName("select")[0];
+            current.push(parent.options[parent.selectedIndex].value);
+        }
+        var out = "";
+        var count = 0;
+        for(var e=0; e<list.length; e++) {
+            if(current.indexOf(list[e])===-1) {
+                count++;
+                out += (out=="" ? "" : (count%3==0 ? "<br/>" : ", " ))+list[e];
+            }
+        }
+        document.getElementById("sorting").getElementsByTagName("table")[slot].getElementsByTagName("tr")[13].getElementsByTagName("td")[1].innerHTML = "("+count+") "+out;
     }
     function add(slot) { 
         // victim = victimise(nameA[id],rolesA[id],classesA[id]);
