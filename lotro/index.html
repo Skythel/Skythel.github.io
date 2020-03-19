@@ -290,7 +290,7 @@
         const rolesA = [];
         const classesA = [];
         // add them all to array
-        for(var i=1; i<document.getElementsByClassName("tr0").length; i++) {
+        for(var i=0; i<document.getElementsByClassName("tr0").length; i++) {
             // set vars
             var parent = document.getElementsByClassName("tr0")[i];
             var name = parent.getElementsByTagName("td")[2].innerHTML.split(/\/| /)[0];
@@ -318,17 +318,95 @@
                 classesA.push(classes);
             }
         }
-        // create the dropdown
-        var dd = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';
-        for(var i=0; i<nameA.length; i++) {
-            dd += '<option>'+nameA[i]+'</option>';
-        }
-        dd+='</select>'; 
-        for(var i=0; i<5; i++) {
-            for(var j=1; j<13; j++) {
-                document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[j].getElementsByTagName("td")[1].innerHTML = dd;
+        const ddTank = [];
+        const ddHeals = [];
+        const ddSupport = [];
+        const ddDPS = [];
+        // create the dropdowns
+        for(var d=0; d<5; d++) {
+            ddTank[d] = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';
+            ddHeals[d] = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';
+            ddSupport[d] = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';
+            ddDPS[d] = '<select class="victims" onchange="update()"><option value="-1">-- Gollum --</option>';      
+
+            switch(d) {
+                case 0:
+                    var o="Friday 8AM"; 
+                    break;
+                case 1:
+                    var o="Friday 8PM"; 
+                    break;
+                case 2:
+                    var o="Saturday 8AM"; 
+                    break;
+                case 3:
+                    var o="Saturday 8PM"; 
+                    break;
+                case 4:
+                    var o="Sunday 8AM"; 
+                    break;
             }
+
+            for(var i=0; i<nameA.length; i++) {
+                if(!(slotsA[i].indexOf(o)===-1)) {
+                    if(!(rolesA[i].indexOf("Tank")===-1)) {
+                        ddTank[d] += '<option>'+nameA[i]+'</option>';
+                    }
+                }
+            }
+            for(var i=0; i<nameA.length; i++) {
+                if(!(slotsA[i].indexOf(o)===-1)) {
+                    if(!(rolesA[i].indexOf("Heals")===-1)) {
+                        ddHeals[d] += '<option>'+nameA[i]+'</option>';
+                    }
+                }
+            }
+            for(var i=0; i<nameA.length; i++) {
+                if(!(slotsA[i].indexOf(o)===-1)) {
+                    if(!(rolesA[i].indexOf("Support")===-1)) {
+                        ddSupport[d] += '<option>'+nameA[i]+'</option>';
+                    }
+                }
+            }
+            for(var i=0; i<nameA.length; i++) {
+                if(!(slotsA[i].indexOf(o)===-1)) {
+                    if(!(rolesA[i].indexOf("DPS")===-1)) {
+                        ddDPS[d] += '<option>'+nameA[i]+'</option>';
+                    }
+                }
+            }
+
+            ddTank[d]+='</select>';
+            ddHeals[d]+='</select>';
+            ddSupport[d]+='</select>';
+            ddDPS[d]+='</select>';
         }
+        
+        for(var i=0; i<5; i++) {
+            // mt, offtank
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[1].getElementsByTagName("td")[1].innerHTML = ddTank[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[2].getElementsByTagName("td")[1].innerHTML = ddTank[i];
+            // heals
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[3].getElementsByTagName("td")[1].innerHTML = ddHeals[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[4].getElementsByTagName("td")[1].innerHTML = ddHeals[i];
+            //lm, burg, rcpy
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[5].getElementsByTagName("td")[1].innerHTML = ddSupport[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[6].getElementsByTagName("td")[1].innerHTML = ddSupport[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[7].getElementsByTagName("td")[1].innerHTML = ddSupport[i];
+            // 5 dps
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[8].getElementsByTagName("td")[1].innerHTML = ddDPS[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[9].getElementsByTagName("td")[1].innerHTML = ddDPS[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[10].getElementsByTagName("td")[1].innerHTML = ddDPS[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[11].getElementsByTagName("td")[1].innerHTML = ddDPS[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[12].getElementsByTagName("td")[1].innerHTML = ddDPS[i];
+        }
+
+        // until i can get my head around 60 for-loops...
+        // for(var i=0; i<5; i++) {
+        //     for(var j=1; j<13; j++) {
+        //         document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[j].getElementsByTagName("td")[1].innerHTML = dd;
+        //     }
+        // }
         // // sort on day first
         // for(var i=0; i<slotsA.length; i++) {
         //     if(slotsA[i].length==1) {
