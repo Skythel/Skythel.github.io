@@ -6,16 +6,22 @@
     <link rel="stylesheet" type="text/css" href="icons.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="prettify.css" />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $('.weNeedMoreDPS').click(function() {
+            $('#sorting').toggleClass('close');
+        });
+    </script> -->
   </head>
   <body>
     <p>Skynet's Amazing Raid Sorting Hat</p>
 
     <button id="sort" onclick="sTable()">Toggle Lineup View</button>
     <!-- <button id="sort" onclick="sort()">Sorting Hat</button> -->
-
+    <button class="weNeedMoreDPS">Toggle Lineup View</button>
     <div id="wrapper">
     <pre id="content" style="white-space: pre-wrap;"></pre>
-    <div id="sorting" style="display:none">      
+    <div id="sorting" style="display:none">
         <table id="slot1c">
             <th>Friday 8AM</th>
             <tr><td>Main Tank</td><td class='pMain'></td></tr>
@@ -99,6 +105,8 @@
     </div>
     <div id="container"></div>
     </div>
+
+    
 
     <script type="text/javascript">
     function sTable() {
@@ -478,7 +486,7 @@
         for(var e=0; e<list.length; e++) {
             if(current.indexOf(list[e])===-1) {
                 count++;
-                out += (out=="" ? "" : (count%3==0 ? "<br/>" : ", " ))+list[e];
+                out += (out=="" ? "" : ", " )+list[e];
             }
         }
         document.getElementById("sorting").getElementsByTagName("table")[slot].getElementsByTagName("tr")[13].getElementsByTagName("td")[1].innerHTML = "("+count+") "+out;

@@ -28,6 +28,9 @@ tr td {
     min-width: 1.5em;
     transition: 0.5s;
 }
+#sorting table tr td {
+    max-width: 10em;
+}
 .even td {
     background: #2c3e50;
 }
