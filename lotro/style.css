@@ -37,29 +37,6 @@
     display: flex;
     justify-content: center;
 }
-#sorting {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    height: 50%;
-    overflow: hidden;
-    transition: all 1s;
+#sorting,#container {
+    display: block;
 }
-#sorting.close {
-    top: 100%;
-    height: 0;
-}
-.slider {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    overflow: hidden;
-    background-color: #000; color: #FFF;
-    transition: all 1s;
-  }
-  
-  .slider.close {
-    top: 100%;
-    height: 0;
-  }
