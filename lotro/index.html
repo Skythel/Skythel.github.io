@@ -14,7 +14,8 @@
     </script> -->
   </head>
   <body>
-    <p>Skynet's Amazing Raid Sorting Hat</p>
+    <h3>Skynet's Amazing Raid Sorting Hat</h3>
+    <div>#BeleRules</div><br/>
 
     <button id="sort" onclick="sTable()">Toggle Lineup View</button>
     <!-- <button id="sort" onclick="sort()">Sorting Hat</button> -->
@@ -23,7 +24,7 @@
     <pre id="content" style="white-space: pre-wrap;"></pre>
     <div id="sorting" style="display:none">
         <table id="slot1c">
-            <th>Friday 8AM</th>
+            <th>Friday 8AM &nbsp;<div onclick="copy(1)" class="copy tip tipright"><span>Copy Lineup</span></div></th>
             <tr><td>Main Tank</td><td class='pMain'></td></tr>
             <tr><td>Off Tank</td><td class='pOff'></td></tr>
             <tr><td>Heal 1</td><td class='pH1'></td></tr>
@@ -39,7 +40,7 @@
             <tr><td>Alternates</td><td id="a1"></td></tr>
         </table>
         <table id="slot2c">
-            <th>Friday 8PM</th>
+            <th>Friday 8PM &nbsp;<div onclick="copy(2)" class="copy tip tipright"><span>Copy Lineup</span></div></th>
             <tr><td>Main Tank</td><td class='pMain'></td></tr>
             <tr><td>Off Tank</td><td class='pOff'></td></tr>
             <tr><td>Heal 1</td><td class='pH1'></td></tr>
@@ -55,7 +56,7 @@
             <tr><td>Alternates</td><td id="a2"></td></tr>
         </table>
         <table id="slot3c">
-            <th>Saturday 8AM</th>
+            <th>Saturday 8AM &nbsp;<div onclick="copy(3)" class="copy tip tipright"><span>Copy Lineup</span></div></th>
             <tr><td>Main Tank</td><td class='pMain'></td></tr>
             <tr><td>Off Tank</td><td class='pOff'></td></tr>
             <tr><td>Heal 1</td><td class='pH1'></td></tr>
@@ -71,7 +72,7 @@
             <tr><td>Alternates</td><td id="a3"></td></tr>
         </table>
         <table id="slot4c">
-            <th>Saturday 8PM</th>
+            <th>Saturday 8PM &nbsp;<div onclick="copy(4)" class="copy tip tipright"><span>Copy Lineup</span></div></th>
             <tr><td>Main Tank</td><td class='pMain'></td></tr>
             <tr><td>Off Tank</td><td class='pOff'></td></tr>
             <tr><td>Heal 1</td><td class='pH1'></td></tr>
@@ -87,7 +88,7 @@
             <tr><td>Alternates</td><td id="a4"></td></tr>
         </table>
         <table id="slot5c">
-            <th>Sunday 8AM</th>
+            <th>Sunday 8AM &nbsp;<div onclick="copy(5)" class="copy tip tipright"><span>Copy Lineup</span></div></th>
             <tr><td>Main Tank</td><td class='pMain'></td></tr>
             <tr><td>Off Tank</td><td class='pOff'></td></tr>
             <tr><td>Heal 1</td><td class='pH1'></td></tr>
@@ -101,12 +102,12 @@
             <tr><td>DPS 4</td><td class='pDPS4'></td></tr>
             <tr><td>DPS 5</td><td class='pDPS5'></td></tr>
             <tr><td>Alternates</td><td id="a5"></td></tr>
-        </table>
+        </table><br/><br/>
+        <label for="weNeedMoreeDPS">Copied Lineup:</label><br/>
+        <textarea rows="15" cols="50" name="weNeedMoreeDPS" id="weNeedMoreeDPS">Give it to us raw and wriggling. You keep nasty chips.</textarea>
     </div>
     <div id="container"></div>
     </div>
-
-    
 
     <script type="text/javascript">
     function sTable() {
@@ -475,6 +476,9 @@
         // }
     }
     function update(slot) {
+        if(document.getElementsByClassName("tipright")[slot].classList.contains("copy_done")) {
+            document.getElementsByClassName("tipright")[slot].className = "copy tip tipright";
+        }
         const list = [];
         const current = [];
         for(var i=0; i<document.getElementsByClassName("tr0").length; i++) {
@@ -525,6 +529,82 @@
         }
         document.getElementById("sorting").getElementsByTagName("table")[slot].getElementsByTagName("tr")[13].getElementsByTagName("td")[1].innerHTML = "("+count+") "+out;
     }
+    function copy(a) {
+        // send em to the textarea
+        var out = "";
+        var flag = 0;
+        out += "** "+document.getElementById("sorting").
+        getElementsByTagName("table")[a-1].
+        getElementsByTagName("tr")[0].
+        getElementsByTagName("th")[0].innerHTML.split("&nbsp;")[0]+"**&#10;";
+        for(var j=1; j<14; j++) {
+            if(j<13) {
+                var parent = document.getElementById("sorting").
+                getElementsByTagName("table")[a-1].
+                getElementsByTagName("tr")[j].
+                getElementsByTagName("td")[1].
+                getElementsByTagName("select")[0];
+                var name = parent.options[parent.selectedIndex].value=="-1" ? "" : parent.options[parent.selectedIndex].value;
+            }
+            else {
+                var alts = document.getElementById("sorting").
+                getElementsByTagName("table")[a-1].
+                getElementsByTagName("tr")[j].
+                getElementsByTagName("td")[1].innerHTML;
+            }
+            if(j==1) {
+                out += "Main Tank: "+name+"&#10;";
+                continue;
+            }
+            if(j==2) {
+                out += "Off Tank: "+name+"&#10;";
+                continue;
+            }
+            if(j==3 || j==4) {
+                out += "Heal "+(j-2)+": "+name+"&#10;";
+                continue;
+            }
+            if(j==5) {
+                out += "LM: "+name+"&#10;";
+                continue;
+            }
+            if(j==6) {
+                out += "Burg: "+name+"&#10;";
+                continue;
+            }
+            if(j==7) {
+                out += "Red Cappy: "+name+"&#10;";
+                continue;
+            }
+            if(j==8) {
+                out += "DPS: "+name;
+                if(name!=="") {
+                    flag = 1;
+                }
+                continue;
+            }
+            if(j>8 && j<13) {
+                out += (flag==0||name=="" ? "" : ", ")+name;
+                if(name!=="") {
+                    flag = 1;
+                }
+                continue;
+            }
+            if(j==13) {
+                out += "&#10;&#10;Alternates: "+alts;
+            }
+        }
+        var copyKitty = document.getElementById("weNeedMoreeDPS");
+        copyKitty.innerHTML = out;
+        // copy
+        copyKitty.select();
+        copyKitty.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        if(document.getElementsByClassName("tipright")[a-1].classList.contains("copy")) {
+            document.getElementsByClassName("tipright")[a-1].className = "copy_done tip tipright";
+        }
+    }
+
     function add(slot) { 
         // victim = victimise(nameA[id],rolesA[id],classesA[id]);
         // switch(slot) {

@@ -37,7 +37,7 @@ tr td {
 .odd td {
     background: #34495e;
 }
-button,select {
+button,select,textarea {
     background: linear-gradient(#333,#222);
     border: 0.05em solid #f39c12;
     color: #ecf0f1;
@@ -53,4 +53,10 @@ option {
 }
 tr:hover td {
     background: rgba(243, 156, 18, 0.8);
+}
+th {
+    height: 25px;
+}
+textarea {
+    background: #222;
 }

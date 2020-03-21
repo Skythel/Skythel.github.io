@@ -1,5 +1,8 @@
 # Skynet's Amazing Changelog, or something like that
-## Current version: 0.1.2
+## Current version: 0.1.3
+
+### ver 0.1.3
+The copyKitty arrives! No longer do you have to manually type in a lineup, now you can simply copy it with the click of a button! 
 
 ### ver 0.1.2
 Leaves spaces for slots and roles that a player does not have. I was going to do that for classes too, but nah, I think it's fine. 

@@ -27,6 +27,9 @@
 .tipleft:hover span, .tipleft:active span {
     margin: -30px 0 0 -100px;
 }
+.tipright:hover span, .tipright:active span {
+    margin: -20px 0 0 30px;
+}
 #slot1c,#slot2c,#slot3c,#slot4c,#slot5c {
     display: inline;
     position: center;
