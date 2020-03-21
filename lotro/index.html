@@ -205,79 +205,92 @@
         // timeslots
         array = data[2].split(", ");
         output += "</td><td> ";
+        var cases;
+        cases = Array.from({length:5}).map(x => "hide")
         for(var i=0; i<array.length; i++) {
             switch(array[i]) {
                 case "Friday 8:00 AM":
-                    output += "<div class=\"fri8am tip\" onclick=\"add(1,id)\"><span>Friday 8AM</span></div>";
+                    cases[0] = "show";
                     break;
                 case "Friday 8:00 PM":
-                    output += "<div class=\"fri8pm tip\" onclick=\"add(2,id)\"><span>Friday 8PM</span></div>";
+                    cases[1] = "show";
                     break;
                 case "Saturday 8:00 AM":
-                    output += "<div class=\"sat8am tip\" onclick=\"add(3,id)\"><span>Saturday 8AM</span></div>";
+                    cases[2] = "show";
                     break;
                 case "Saturday 8:00 PM":
-                    output += "<div class=\"sat8pm tip\" onclick=\"add(4,id)\"><span>Saturday 8PM</span></div>";
+                    cases[3] = "show";
                     break;
                 case "Sunday 8:00 AM":
-                    output += "<div class=\"sun8am tip\" onclick=\"add(5,id)\"><span>Sunday 8AM</span></div>";
+                    cases[4] = "show";  
                     break;
                 default: 
                     misc += "[Timeslot: "+array[i]+"]";
             }
         }
+        // I know, not the most effective...but wateva, it works
+        output += "<div class=\"fri8am tip "+cases[0]+"\" onclick=\"add(1,id)\"><span>Friday 8AM</span></div>";
+        output += "<div class=\"fri8pm tip "+cases[1]+"\" onclick=\"add(2,id)\"><span>Friday 8PM</span></div>";
+        output += "<div class=\"sat8am tip "+cases[2]+"\" onclick=\"add(3,id)\"><span>Saturday 8AM</span></div>";
+        output += "<div class=\"sat8pm tip "+cases[3]+"\" onclick=\"add(4,id)\"><span>Saturday 8PM</span></div>";
+        output += "<div class=\"sun8am tip "+cases[4]+"\" onclick=\"add(5,id)\"><span>Sunday 8AM</span></div>";
         // roles
         array = data[3].split(", ");
         output += "</td><td> ";
+        cases = Array.from({length:4}).map(x => "hide")
         for(var i=0; i<array.length; i++) {
             switch(array[i]) {
                 case "DPS":
-                    output += "<div class=\"dps tip\"><span>DPS</span></div>";
+                    cases[0] = "show";
                     break;
                 case "Support":
-                    output += "<div class=\"support tip\"><span>Support</span></div>";
+                    cases[1] = "show";
                     break;
                 case "Heals":
-                    output += "<div class=\"heals tip\"><span>Heals</span></div>";
+                    cases[2] = "show";
                     break;
                 case "Tank":
-                    output += "<div class=\"tank tip\"><span>Tank</span></div>";
+                    cases[3] = "show";
                     break;
                 default: 
                     misc += "[Role: "+array[i]+"]";
             }            
         }
+        output += "<div class=\"dps tip "+cases[0]+"\"><span>DPS</span></div>";
+        output += "<div class=\"support tip "+cases[1]+"\"><span>Support</span></div>";
+        output += "<div class=\"heals tip "+cases[2]+"\"><span>Heals</span></div>";  
+        output += "<div class=\"tank tip "+cases[3]+"\"><span>Tank</span></div>";
         // classes
         array = data[4].split(", ");
         output += "</td><td> ";
         for(var i=0; i<array.length; i++) {
             switch(array[i]) {
                 case "Beorning":
-                    output += "<div class=\"beorning tip\"><span>Beorning</span></div> ";
+                    output += "<div class=\"beorning tip show\"><span>Beorning</span></div> ";
                     break;
                 case "Burglar":
-                    output += "<div class=\"burg tip\"><span>Burglar</span></div> ";
+                    output += "<div class=\"burg tip show\"><span>Burglar</span></div> ";
                     break;
                 case "Captain":
-                    output += "<div class=\"cpt tip\"><span>Captain</span></div> ";
+                    output += "<div class=\"cpt tip show\"><span>Captain</span></div> ";
                     break;
                 case "Champion":
-                    output += "<div class=\"champ tip\"><span>Champion</span></div> ";
+                    output += "<div class=\"champ tip show\"><span>Champion</span></div> ";
                     break;
                 case "Guardian":
-                    output += "<div class=\"guard tip\"><span>Guardian</span></div> ";
+                    output += "<div class=\"guard tip show\"><span>Guardian</span></div> ";
                     break;
                 case "Hunter":
-                    output += "<div class=\"hunt tip\"><span>Hunter</span></div> ";
+                    output += "<div class=\"hunt tip show\"><span>Hunter</span></div> ";
                     break;
                 case "Lore Master":
-                    output += "<div class=\"lm tip\"><span>Lore Master</span></div> ";
+                    output += "<div class=\"lm tip show\"><span>Lore Master</span></div> ";
                     break;
                 case "Minstrel":
-                    output += "<div class=\"mini tip\"><span>Minstrel</span></div> ";
+                    output += "<div class=\"mini tip show\"><span>Minstrel</span></div> ";
                     break;
                 case "Rune Keeper":
-                    output += "<div class=\"rk tip\"><span>Rune Keeper</span></div> ";
+                    output += "<div class=\"rk tip show\"><span>Rune Keeper</span></div> ";
                     break;
                 case "Warden":
                     output += "<div class=\"warden tip\"><span>Warden</span></div> ";
@@ -311,15 +324,15 @@
             const roles = [];
             const classes = [];
             for(var e=3; e<6; e++) {
-                for(var j=0; j<parent.getElementsByTagName("td")[e].getElementsByTagName("div").length; j++) {
+                for(var j=0; j<parent.getElementsByTagName("td")[e].getElementsByClassName("show").length; j++) {
                     if(e==3) {
-                        slots.push(parent.getElementsByTagName("td")[e].getElementsByTagName("div")[j].getElementsByTagName("span")[0].innerHTML);
+                        slots.push(parent.getElementsByTagName("td")[e].getElementsByClassName("show")[j].getElementsByTagName("span")[0].innerHTML);
                     }
                     else if(e==4) {
-                        roles.push(parent.getElementsByTagName("td")[e].getElementsByTagName("div")[j].getElementsByTagName("span")[0].innerHTML);
+                        roles.push(parent.getElementsByTagName("td")[e].getElementsByClassName("show")[j].getElementsByTagName("span")[0].innerHTML);
                     }
                     else {
-                        classes.push(parent.getElementsByTagName("td")[e].getElementsByTagName("div")[j].getElementsByTagName("span")[0].innerHTML);
+                        classes.push(parent.getElementsByTagName("td")[e].getElementsByClassName("show")[j].getElementsByTagName("span")[0].innerHTML);
                     }
                 }
             }
@@ -331,17 +344,22 @@
                 classesA.push(classes);
             }
         }
-        const ddTank = [];
+        const ddMainT = [];
+        const ddOffT = [];
         const ddHeals = [];
-        const ddSupport = [];
+        const ddLM = [];
+        const ddBurg = [];
+        const ddCpt = [];
         const ddDPS = [];
         // create the dropdowns
         for(var d=0; d<5; d++) {
-            ddTank[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
+            ddMainT[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
+            ddOffT[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
             ddHeals[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
-            ddSupport[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
+            ddLM[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
+            ddBurg[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
+            ddCpt[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>';
             ddDPS[d] = '<select class="victims" onchange="update('+d+')"><option value="-1">-- Gollum --</option>'; 
-
             switch(d) {
                 case 0:
                     var o="Friday 8AM"; 
@@ -363,43 +381,54 @@
             for(var i=0; i<nameA.length; i++) {
                 if(!(slotsA[i].indexOf(o)===-1)) {
                     if(!(rolesA[i].indexOf("Tank")===-1)) {
-                        ddTank[d] += '<option>'+nameA[i]+'</option>';
+                        // I don't seriously think we're going to see maintank anything but guard and offtank anything but cappy for now, so let's just leave this be for the time being. 
+                        if(!(classesA[i].indexOf("Guardian")===-1)) {
+                            ddMainT[d] += '<option>'+nameA[i]+'</option>';
+                        }
+                        if(!(classesA[i].indexOf("Captain")===-1)) {
+                            ddOffT[d] += '<option>'+nameA[i]+'</option>';
+                        }
                     }
-                }
-                if(!(slotsA[i].indexOf(o)===-1)) {
                     if(!(rolesA[i].indexOf("Heals")===-1)) {
                         ddHeals[d] += '<option>'+nameA[i]+'</option>';
                     }
-                }
-                if(!(slotsA[i].indexOf(o)===-1)) {
                     if(!(rolesA[i].indexOf("Support")===-1)) {
-                        ddSupport[d] += '<option>'+nameA[i]+'</option>';
+                        if(!(classesA[i].indexOf("Lore Master")===-1)) {
+                            ddLM[d] += '<option>'+nameA[i]+'</option>';
+                        }
+                        if(!(classesA[i].indexOf("Burglar")===-1)) {
+                            ddBurg[d] += '<option>'+nameA[i]+'</option>';
+                        }
+                        if(!(classesA[i].indexOf("Captain")===-1)) {
+                            ddCpt[d] += '<option>'+nameA[i]+'</option>';
+                        }
                     }
-                }
-                if(!(slotsA[i].indexOf(o)===-1)) {
                     if(!(rolesA[i].indexOf("DPS")===-1)) {
                         ddDPS[d] += '<option>'+nameA[i]+'</option>';
                     }
                 }
             }
 
-            ddTank[d]+='</select>';
+            ddMainT[d]+='</select>';
+            ddOffT[d]+='</select>';
             ddHeals[d]+='</select>';
-            ddSupport[d]+='</select>';
+            ddLM[d]+='</select>';
+            ddBurg[d]+='</select>';
+            ddCpt[d]+='</select>';
             ddDPS[d]+='</select>';
         }
         
         for(var i=0; i<5; i++) {
             // mt, offtank
-            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[1].getElementsByTagName("td")[1].innerHTML = ddTank[i];
-            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[2].getElementsByTagName("td")[1].innerHTML = ddTank[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[1].getElementsByTagName("td")[1].innerHTML = ddMainT[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[2].getElementsByTagName("td")[1].innerHTML = ddOffT[i];
             // heals
             document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[3].getElementsByTagName("td")[1].innerHTML = ddHeals[i];
             document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[4].getElementsByTagName("td")[1].innerHTML = ddHeals[i];
             //lm, burg, rcpy
-            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[5].getElementsByTagName("td")[1].innerHTML = ddSupport[i];
-            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[6].getElementsByTagName("td")[1].innerHTML = ddSupport[i];
-            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[7].getElementsByTagName("td")[1].innerHTML = ddSupport[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[5].getElementsByTagName("td")[1].innerHTML = ddLM[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[6].getElementsByTagName("td")[1].innerHTML = ddBurg[i];
+            document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[7].getElementsByTagName("td")[1].innerHTML = ddCpt[i];
             // 5 dps
             document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[8].getElementsByTagName("td")[1].innerHTML = ddDPS[i];
             document.getElementById("sorting").getElementsByTagName("table")[i].getElementsByTagName("tr")[9].getElementsByTagName("td")[1].innerHTML = ddDPS[i];
@@ -448,7 +477,6 @@
     function update(slot) {
         const list = [];
         const current = [];
-        // remove selected person from other dropdowns, something ill do later
         for(var i=0; i<document.getElementsByClassName("tr0").length; i++) {
             // set vars
             var name = document.getElementsByClassName("tr0")[i].getElementsByTagName("td")[2].innerHTML.split(/\/| /)[0];
@@ -464,8 +492,7 @@
                 case 4: 
                     var c="sun8am"; break;
             }
-            if(document.getElementsByClassName("tr0")[i].getElementsByTagName("td")[3].getElementsByClassName(c).length > 0) { //subject to change to visibility!
-                console.log("hey there");
+            if(document.getElementsByClassName("tr0")[i].getElementsByTagName("td")[3].getElementsByClassName(c+" show").length > 0) { 
                 // add values
                 if(list.indexOf(name)===-1) {
                     list.push(name);
@@ -479,6 +506,13 @@
             getElementsByTagName("tr")[j].
             getElementsByTagName("td")[1].
             getElementsByTagName("select")[0];
+            // check if person was selected twice
+            if(current.indexOf(parent.options[parent.selectedIndex].value)!==-1 && parent.value!=="-1") {
+                parent.style.border = "1px solid red";
+            }
+            else {
+                parent.style.border = "";
+            }
             current.push(parent.options[parent.selectedIndex].value);
         }
         var out = "";

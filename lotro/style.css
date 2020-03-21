@@ -40,3 +40,6 @@
 #sorting,#container {
     display: block;
 }
+.hide {
+    visibility: hidden;
+}
