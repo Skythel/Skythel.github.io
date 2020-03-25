@@ -144,3 +144,15 @@
     width:48px;
     display: inline-block;
 }
+.pink {
+    background: url('images/pink.png');
+    height:48px;
+    width:48px;
+    display: inline-block;
+}
+.vil {
+    background: url('images/chicken.png');
+    height:48px;
+    width:48px;
+    display: inline-block;
+}

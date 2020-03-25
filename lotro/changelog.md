@@ -1,5 +1,8 @@
 # Skynet's Amazing Changelog, or something like that
-## Current version: 0.1.4
+## Current version: 0.1.4b
+
+### ver 0.1.4b
+2 new themes added. 
 
 ### ver 0.1.4
 Tired of dark themes? Switch to light theme with just one click! Toggle between light and dark themes at your leisure. Themes are saved using a browser cookie. Nom! 

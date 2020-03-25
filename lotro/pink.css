@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+body {
+    background: lightpink;
+    color: #b21f66;
+    font-family: 'Lato', sans-serif;
+    font-size: 1em;
+}
+table {
+    background: transparent;
+    padding-top: 0.2em;
+    border: 1px solid #f54291;
+}
+td,th {
+    border-bottom: 1px solid #ff78ae;
+    box-shadow: inset 0 -5px 5px -5px #b21f66;
+}
+button, select {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9em;
+}
+tr td {
+    background: #ffa0d2;
+    padding: 0.2em;
+    min-width: 1.5em;
+    transition: 0.5s;
+}
+.even td {
+    background: #ffa0d2;
+}
+.odd td {
+    background: #ff78ae;
+}
+button,select,textarea {
+    background: linear-gradient(#ffa0d2,#ff78ae);
+    border: 0.1em solid #f54291;
+    color: #b21f66;
+    outline: none;
+    padding: 0.3em;
+    transition: 0.5s;
+}
+button:hover {
+    background: linear-gradient(#ff78ae,#ffa0d2);
+}
+option {
+    background: #fd94b4;
+}
+tr:hover td {
+    background: #ffb2a7;
+}
+textarea {
+    background: #ffa0d2;
+}
+.tip:hover span, .tip:active span {
+    border: 1px solid #ff78ae;
+    box-shadow: 0 0 0.2em #b21f66;
+    background: #ffa0d2;
+}
+.copy,.copy_done {
+    background-color: #e6739f;
+    border-radius: 0.25em;
+}

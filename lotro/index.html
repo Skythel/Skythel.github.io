@@ -24,24 +24,39 @@
         }
         function checkCookie() {
             var curtheme = getCookie("theme");
-            if (curtheme=="" || curtheme=="dark") {
-                document.getElementsByClassName("iamsoOP")[0].classList.add("moon");
-                link=document.createElement('link');
-                link.href='prettify.css';
-                link.rel='stylesheet';
-                link.type='text/css';
-                link.id='iamsooooOP';
-                document.getElementsByTagName('head')[0].appendChild(link);
-            } else {
+            link=document.createElement('link');
+            link.rel='stylesheet';
+            link.type='text/css';
+            link.id='iamsooooOP';
+            if (curtheme=="light") {
                 document.getElementsByClassName("iamsoOP")[0].classList.add("sun");
-                link=document.createElement('link');
                 link.href='prettify-light.css';
-                link.rel='stylesheet';
-                link.type='text/css';
-                link.id='iamsooooOP';
-                document.getElementsByTagName('head')[0].appendChild(link);
+            } else if (curtheme=="pink") {
+                document.getElementsByClassName("iamsoOP")[0].classList.add("pink");
+                link.href='pink.css';
+            } else if (curtheme=="vilanya") {
+                document.getElementsByClassName("iamsoOP")[0].classList.add("vil");
+                link.href='vilanya.css';
+                // makeItSnow();
+            } else {
+                document.getElementsByClassName("iamsoOP")[0].classList.add("moon");
+                link.href='prettify.css';
             }
+            document.head.appendChild(link);
         }
+        // function makeItSnow() {
+        //     if(getCookie("theme")=="vilanya"&&!(document.getElementById("snowfall"))) {
+        //         var script = document.createElement('script');
+        //         script.src = 'snowfall.js';    
+        //         script.id = 'snowfall';
+        //         document.head.appendChild(script);
+        //     }
+        //     else {
+        //         if(document.getElementById("snowfall")) {
+        //             document.getElementById("snowfall").remove();
+        //         }
+        //     }
+        // }
     </script>
     <link rel="stylesheet" type="text/css" href="icons.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
@@ -152,18 +167,35 @@
 
     <script type="text/javascript">
     function setTheme() {
-        if(getCookie("theme")=="" || getCookie("theme")=="dark") {
-            newTheme = "light";
-            document.getElementsByClassName("iamsoOP")[0].classList.remove("moon");
-            document.getElementsByClassName("iamsoOP")[0].classList.add("sun");
+        if(getCookie("theme")=="light") {
+            newTheme = "pink";
+            document.getElementsByClassName("iamsoOP")[0].className = "iamsoOP tip pink";
         }
-        else if(getCookie("theme")=="light") {
+        else if(getCookie("theme")=="pink") {
+            newTheme = "vilanya";
+            // makeItSnow();
+            document.getElementsByClassName("iamsoOP")[0].className = "iamsoOP tip vil";
+        }
+        else if(getCookie("theme")=="vilanya") {
             newTheme = "dark";
-            document.getElementsByClassName("iamsoOP")[0].classList.remove("sun");
-            document.getElementsByClassName("iamsoOP")[0].classList.add("moon");
+            document.getElementsByClassName("iamsoOP")[0].className = "iamsoOP tip moon";
+        }
+        else {
+            newTheme = "light";
+            document.getElementsByClassName("iamsoOP")[0].className = "iamsoOP tip sun";
         }
         setCookie("theme",newTheme);
-        document.getElementById("iamsooooOP").setAttribute("href",(newTheme=="dark" ? "prettify.css" : "prettify-light.css"));
+        switch(newTheme) {
+            case "light":
+                var t = "prettify-light.css"; break;
+            case "pink":
+                var t = "pink.css"; break;
+            case "vilanya":
+                var t = "vilanya.css"; break;
+            default:
+                var t = "prettify.css"; break;
+        }
+        document.getElementById("iamsooooOP").setAttribute("href",t);
     }
     function sTable() {
         if(document.getElementById("sorting").style.display=="none") {
