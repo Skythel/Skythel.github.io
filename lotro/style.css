@@ -11,12 +11,9 @@
     font-size: 0.9em;
 }
 .tip:hover span, .tip:active span {
-    border: 1px solid #7f8c8d;
-    box-shadow: 0 0 0.2em #3498db;
     padding: 0.2em;
     display: block;
     z-index: 999;
-    background: #222;
     left: 0px;
     margin: -30px 0 0 0;
     position: absolute;
@@ -29,6 +26,9 @@
 }
 .tipright:hover span, .tipright:active span {
     margin: -20px 0 0 30px;
+}
+.iamsoOP:hover span, .iamsoOP:active span {
+    margin: 10px 0 0 -110px;
 }
 #slot1c,#slot2c,#slot3c,#slot4c,#slot5c {
     display: inline;
@@ -45,4 +45,22 @@
 }
 .hide {
     visibility: hidden;
+}
+th {
+    height: 25px;
+}
+#victimsList {
+    padding: 0 0.1em 0.15em 0.15em;
+    border-radius: 0.1em;
+}
+#sorting table tr td {
+    max-width: 10em;
+}
+.iamsoOP {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+}
+.iamsoOP:hover {
+    position: absolute;
 }

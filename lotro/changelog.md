@@ -1,5 +1,9 @@
 # Skynet's Amazing Changelog, or something like that
-## Current version: 0.1.3
+## Current version: 0.1.4
+
+### ver 0.1.4
+Tired of dark themes? Switch to light theme with just one click! Toggle between light and dark themes at your leisure. Themes are saved using a browser cookie. Nom! 
+Also removed the weird space in lineup copies. 
 
 ### ver 0.1.3
 The copyKitty arrives! No longer do you have to manually type in a lineup, now you can simply copy it with the click of a button! 

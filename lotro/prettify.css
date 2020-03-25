@@ -18,18 +18,11 @@ button, select {
     font-family: 'Lato', sans-serif;
     font-size: 0.9em;
 }
-#victimsList {
-    padding: 0 0.1em 0.15em 0.15em;
-    border-radius: 0.1em;
-}
 tr td {
     background: rgba(44, 62, 80, 0.5);
     padding: 0.2em;
     min-width: 1.5em;
     transition: 0.5s;
-}
-#sorting table tr td {
-    max-width: 10em;
 }
 .even td {
     background: #2c3e50;
@@ -54,9 +47,11 @@ option {
 tr:hover td {
     background: rgba(243, 156, 18, 0.8);
 }
-th {
-    height: 25px;
-}
 textarea {
+    background: #222;
+}
+.tip:hover span, .tip:active span {
+    border: 1px solid #7f8c8d;
+    box-shadow: 0 0 0.2em #3498db;
     background: #222;
 }

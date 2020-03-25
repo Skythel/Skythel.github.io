@@ -3,9 +3,50 @@
   <head>
     <title>Skynet's Amazing Raid Sorting Hat</title>
     <meta charset="utf-8" />
+    <script>
+        // generic cookie functions
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function setCookie(cname,cvalue) {
+            document.cookie = cname + "=" + cvalue + ";path=/";
+        }
+        function checkCookie() {
+            var curtheme = getCookie("theme");
+            if (curtheme=="" || curtheme=="dark") {
+                document.getElementsByClassName("iamsoOP")[0].classList.add("moon");
+                link=document.createElement('link');
+                link.href='prettify.css';
+                link.rel='stylesheet';
+                link.type='text/css';
+                link.id='iamsooooOP';
+                document.getElementsByTagName('head')[0].appendChild(link);
+            } else {
+                document.getElementsByClassName("iamsoOP")[0].classList.add("sun");
+                link=document.createElement('link');
+                link.href='prettify-light.css';
+                link.rel='stylesheet';
+                link.type='text/css';
+                link.id='iamsooooOP';
+                document.getElementsByTagName('head')[0].appendChild(link);
+            }
+        }
+    </script>
     <link rel="stylesheet" type="text/css" href="icons.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="prettify.css" />
+    <!-- for pesky users that dont use js! -->
+    <noscript><link rel="stylesheet" type="text/css" href="prettify.css" /></noscript>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $('.weNeedMoreDPS').click(function() {
@@ -13,10 +54,10 @@
         });
     </script> -->
   </head>
-  <body>
+  <body onload="checkCookie()">
     <h3>Skynet's Amazing Raid Sorting Hat</h3>
     <div>#BeleRules</div><br/>
-
+    <div class="iamsoOP tip" onclick="setTheme()"><span>Change Theme</span></div>
     <button id="sort" onclick="sTable()">Toggle Lineup View</button>
     <!-- <button id="sort" onclick="sort()">Sorting Hat</button> -->
     <!-- <button class="weNeedMoreDPS">Toggle Lineup View</button> -->
@@ -110,6 +151,20 @@
     </div>
 
     <script type="text/javascript">
+    function setTheme() {
+        if(getCookie("theme")=="" || getCookie("theme")=="dark") {
+            newTheme = "light";
+            document.getElementsByClassName("iamsoOP")[0].classList.remove("moon");
+            document.getElementsByClassName("iamsoOP")[0].classList.add("sun");
+        }
+        else if(getCookie("theme")=="light") {
+            newTheme = "dark";
+            document.getElementsByClassName("iamsoOP")[0].classList.remove("sun");
+            document.getElementsByClassName("iamsoOP")[0].classList.add("moon");
+        }
+        setCookie("theme",newTheme);
+        document.getElementById("iamsooooOP").setAttribute("href",(newTheme=="dark" ? "prettify.css" : "prettify-light.css"));
+    }
     function sTable() {
         if(document.getElementById("sorting").style.display=="none") {
             document.getElementById("sorting").style.display = "block";
@@ -533,10 +588,10 @@
         // send em to the textarea
         var out = "";
         var flag = 0;
-        out += "** "+document.getElementById("sorting").
+        out += "**"+document.getElementById("sorting").
         getElementsByTagName("table")[a-1].
         getElementsByTagName("tr")[0].
-        getElementsByTagName("th")[0].innerHTML.split("&nbsp;")[0]+"**&#10;";
+        getElementsByTagName("th")[0].innerHTML.split(" &nbsp;")[0]+"**&#10;";
         for(var j=1; j<14; j++) {
             if(j<13) {
                 var parent = document.getElementById("sorting").
