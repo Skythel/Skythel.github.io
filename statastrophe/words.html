@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Statastrophe :: Words</title>
+        <link rel="stylesheet" type="text/css" href="prettify.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <!-- A project on making statistics fun for teens learning it in school. Wish me all the best! -->
+    </head>
+    <body>
+        <pre id="content" style="white-space: pre-wrap;"></pre>
+        <div id="wrapper">
+            <div id="container"></div>
+        </div><br/>
+        <div id="images">
+            <img class="hist" src="aoahist.png" />
+            <img class="hist" src="vsoahist.png" /><br/>
+            <img class="box" src="aoabox.png" />
+            <img class="box" src="vsoabox.png" />
+        </div>
+        
+        <script>
+        // Client ID and API key from the Developer Console
+        var CLIENT_ID = '1042370824090-qdt1gct9ftvj4plr2c7lfvmmu1oaq3fp.apps.googleusercontent.com';
+        var API_KEY = 'AIzaSyDY8kJ3xKXzza30uBFkJG4FIuJqTbpqLng';
+  
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
+  
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
+
+        function handleClientLoad() {
+          gapi.load('client:auth2', initClient);
+        }
+  
+        function initClient() {
+          gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
+          }).then(function () { 
+            fetchStats();
+          }, function(error) {
+            appendPre(JSON.stringify(error, null, 2));
+          });
+        }
+
+        function appendPre(message) {
+          var pre = document.getElementById('content');
+          var textContent = document.createTextNode(message + '\n');
+          pre.appendChild(textContent);
+        }
+  
+        function appendHtml(message) {
+          var div = document.getElementById('container');
+          div.innerHTML += message;
+        }
+  
+      function fetchStats() {
+          gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: '1OFg75s3C3-cZrJ529ae6qoDJBEz6obAvFI9J0eqZIOg',
+            range: 'E2:G'
+          }).then(function(response) {
+            var range = response.result;
+            if (range.values.length > 0) {
+                rows = 10;
+                output = '<table id="resTbl"><tr><th>No.</th><th>Word</th><th>Age When Learned (Mths)</th><th>No. of Known Words</th></tr>';
+                for (i = 0; i < rows/* range.values.length */; i++) {
+                    var row = range.values[i];
+                    var col = (i%2) ? 'odd' : 'even';
+                    var word = row[0].split("'")[0];
+                    var age = row[1];
+                    var wordnum = row[2]; 
+                    output += "<tr class=\"res "+col+"\"><td>"+(i+1)+"</td><td>"+word+"</td><td>"+age+"</td><td>"+wordnum+"</td></tr>";
+                }
+                output += '</table>';
+                appendHtml(output);
+            } else {
+                appendPre('No data found.');
+            }
+          }, function(response) {
+            appendPre('Error: ' + response.result.error.message);
+          });
+        }
+        </script>
+        <script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+      </script>
+    </body>
+</html>
