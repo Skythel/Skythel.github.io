@@ -4,19 +4,194 @@
         <title>Statastrophe :: RPG</title>
         <link rel="stylesheet" type="text/css" href="prettify.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="icons.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" />
+        <script src="foes.js"></script>
         <!-- A project on making statistics fun for teens learning it in school. Wish me all the best! -->
     </head>
     <body onload="newGame()">
+    <div id="wrapper">
+    <div id="container">
         <div id="header"></div>
+        <div id="hero">
+            <i class="fa fa-3x fa-caret-left" id="hero-icon-left"></i>
+            <div id="hero-icon"></div>
+            <i class="fa fa-3x fa-caret-right" id="hero-icon-right"></i>
+            <br/>
+            <label for="hero-hp" onmouseover="help('hp')" onmouseout="help('none')">Health [?] : </label><div class="stat" id="hero-hp"></div><br/>
+            <label for="hero-atk" onmouseover="help('atk')" onmouseout="help('none')">Attack [?] : </label><div class="stat" id="hero-atk"></div><br/>
+            <label for="hero-def" onmouseover="help('def')" onmouseout="help('none')">Defense [?] : </label><div class="stat" id="hero-def"></div><br/>
+            <label for="hero-int" onmouseover="help('int')" onmouseout="help('none')">Intellect [?] : </label><div class="stat" id="hero-int"></div><br/>
+            <button id="hero-reroll" onmouseover="help('reroll')" onmouseout="help('none')" onclick="rollStats()"><i class="fas fa-dice"></i>Reroll Stats</button>
+            
+            <button id="start" onclick="start()">Start Game!</button>
+        </div>
+
+        <div id="battleground">
+            <div id="statstats">
+                <div id="hero-stats">
+                    <div id="hero-icon"></div><br/>
+                    <div id="hero-name">You</div><br/>
+                    <label for="bg-hero-hp">Health: </label><div class="stat" id="bg-hero-hp"></div><br/>
+                    <label for="bg-hero-atk">Attack: </label><div class="stat" id="bg-hero-atk"></div><br/>
+                    <label for="bg-hero-def">Defense: </label><div class="stat" id="bg-hero-def"></div><br/>
+                    <label for="bg-hero-int">Intellect: </label><div class="stat" id="bg-hero-int"></div><br/>
+                </div>
+
+                <div id="foe-stats">
+                    <div id="foe-icon"></div><br/>
+                    <div id="foe-name">Enemy</div><br/>
+                    <label for="bg-foe-hp">Health: </label><div class="stat" id="bg-foe-hp"></div><br/>
+                    <label for="bg-foe-atk">Attack: </label><div class="stat" id="bg-foe-atk"></div><br/>
+                    <label for="bg-foe-def">Defense: </label><div class="stat" id="bg-foe-def"></div><br/>
+                    <label for="bg-foe-int">Intellect: </label><div class="stat" id="bg-foe-int"></div><br/>
+                </div>
+            </div>
+            <div id="actions">
+                <button onclick="attack()" onmouseover="help('attack')" onmouseout="help('none')">Attack!</button>
+                <button onclick="skill()" onmouseover="help('skill')" onmouseout="help('none')">Use Skill</button>
+            </div>
+            <div id="log"></div>
+        </div>
+
+        <div id="info"></div>
+    </div>
+    </div>
+        
         <script>
             // The Variables
-            var title = document.getElementById("header").innerHTML;
-            var hero = document.getElementById("hero");
+            const title = document.getElementById("header");
+            const hero = document.getElementById("hero");
+            const battleground = document.getElementById("battleground");
+            const heroIcon = document.getElementById("hero-icon");
+            const iconL = document.getElementById("hero-icon-left");
+            const iconR = document.getElementById("hero-icon-right");
+            const heroHp = document.getElementById("hero-hp");
+            const heroAtk = document.getElementById("hero-atk");
+            const heroDef = document.getElementById("hero-def");
+            const heroInt = document.getElementById("hero-int");
+            const bgHeroHp = document.getElementById("bg-hero-hp");
+            const bgHeroAtk = document.getElementById("bg-hero-atk");
+            const bgHeroDef = document.getElementById("bg-hero-def");
+            const bgHeroInt = document.getElementById("bg-hero-int");
+            const bgFoeHp = document.getElementById("bg-foe-hp");
+            const bgFoeAtk = document.getElementById("bg-foe-atk");
+            const bgFoeDef = document.getElementById("bg-foe-def");
+            const bgFoeInt = document.getElementById("bg-foe-int");
+            const foeIcon = document.getElementById("foe-icon");
+            const foeName = document.getElementById("foe-name");
+            const reroll = document.getElementById("hero-reroll");
+            const info = document.getElementById("info");
+            const log = document.getElementById("log");
+            // Customise points
+            var totalPts = 17;
 
             // The Code
             function newGame() {
-                title = "Choose your Hero";
+                // Show stuff
+                hero.style.display = "block";
+                battleground.style.display = "none";
+                title.innerHTML = "Customise your Hero";
+                heroIcon.className = "icon1";
+                iconL.style.visibility = "visible";
+                iconR.style.visibility = "visible";
+                var icon = 1;
+                iconL.setAttribute("onclick","javascript:iconScroll("+(icon-1)+")");
+                iconR.setAttribute("onclick","javascript:iconScroll("+(icon+1)+")");
+                rollStats(totalPts);
             }
+            function rollStats(totalPts) {
+                if(totalPts==0) {
+                    totalPts = 17;
+                }
+                var atk = randomNumber(Math.floor(totalPts/5),Math.floor(totalPts/3));
+                var def = randomNumber(Math.floor(totalPts/5),Math.floor(totalPts/4))
+                var int = totalPts-atk-def;
+                var hp = randomNumber(def+5,def+10);
+                heroHp.innerHTML = hp;
+                heroAtk.innerHTML = atk;
+                heroDef.innerHTML = def;
+                heroInt.innerHTML = int;
+                reroll.style.visibility = "visible";
+                reroll.setAttribute("onclick","javascript:rollStats("+totalPts+")");
+            }
+            function iconScroll(i) {
+                var totalNumIcons = 3;
+                if(i<1) {
+                    i+=totalNumIcons;
+                }
+                else if(i>totalNumIcons) {
+                    i-=totalNumIcons;
+                }
+                heroIcon.className = "icon"+i;               
+                iconL.setAttribute("onclick","javascript:iconScroll("+(i-1)+")");
+                iconR.setAttribute("onclick","javascript:iconScroll("+(i+1)+")");
+            }
+            function start() {
+                title.innerHTML = "Adventure!";
+                var hp = bgHeroHp.innerHTML = heroHp.innerHTML;
+                var atk = bgHeroAtk.innerHTML = heroAtk.innerHTML;
+                var def = bgHeroDef.innerHTML = heroDef.innerHTML;
+                var int = bgHeroInt.innerHTML = heroInt.innerHTML;
+                hero.style.display = "none";
+                battleground.style.display = "";
+
+                // All is good, generate an enemy according to player stats
+                generateFoe(hp,atk,def,int)
+            }
+            function generateFoe(hp,atk,def,int) {
+                var level = 1; // insert some algorithm to calculate player level based on stats....
+                var numOfMobs = 0;
+                for(var i=0; i<mobs.length; i++) {
+                    if(mobs[i]["level"]<level+2 && mobs[i]["level"]>level-5) {
+                        numOfMobs++;
+                    }
+                }
+                var foeId = randomNumber(1,numOfMobs);
+                foeName.innerHTML = mobs[foeId]["name"];
+                foeIcon.innerHTML = mobs[foeId]["image"];
+                bgFoeHp.innerHTML = mobs[foeId]["hp"];
+                bgFoeAtk.innerHTML = mobs[foeId]["atk"];
+                bgFoeDef.innerHTML = mobs[foeId]["def"];
+                bgFoeInt.innerHTML = mobs[foeId]["int"];
+            }
+            function attack() {
+                var hit = Math.abs(randomNumber(bgHeroAtk.innerHTML,bgHeroAtk.innerHTML+3)-bgFoeDef.innerHTML);
+                log.innerHTML = "You hit <b>"+foeName.innerHTML+"</b> with a blast of math answers for <b>"+hit+"</b> Math damage!<br/>"+log.innerHTML;
+            }
+            function help(item) {
+                var output;
+                switch(item) {
+                    case "reroll":
+                        output = "Click to generate another set of random stats if you don't like these current stats.";
+                        break;
+                    case "hp": 
+                        output = "Your health points determine how much damage you can sustain before collapsing."
+                        break;
+                    case "atk":
+                        output = "Your attack determines how much damage you will do against an enemy.";
+                        break;
+                    case "def": 
+                        output = "Your defence determines how much damage you will take from an enemy.";
+                        break;
+                    case "int":
+                        output = "Your intellect determines your ability to use special skills.";
+                        break;
+                    case "attack":
+                        output = "Click to use a normal attack against your foe.";
+                        break;
+                    case "skill":
+                        output = "Click to use a special skill. The skills available to you depend on your INT stat.";
+                        break;
+                    default: 
+                        output = "";
+                        break;
+                }
+                info.innerHTML = output;
+            }
+            function randomNumber(min, max) {  
+                return Math.floor(Math.random()*(max-min)+min);
+            }  
         </script>
     </body>
 </html>

@@ -4,6 +4,7 @@
 }
 #container {
     display: block;
+    text-align: center;
 }
 #resTbl {
     padding: 0 0.1em 0.15em 0.15em;
@@ -18,4 +19,28 @@
 .box {
     max-height: 600px;
     max-width: 400px;
+}
+#info,#log {
+    width: 300px;
+}
+#statstats {
+    display: flex;
+    justify-content: center;
+}
+#statstats #hero-stats {
+    flex: 0 0 55%;
+}
+#statstats #foe-stats {
+    flex: 1;
+}
+#statstats div div, #statstats div label {
+    display: inline;
+}
+label {
+    min-width: 100px;
+    font-weight: bold;
+    display: inline;
+}
+.stat {
+    display: inline;
 }

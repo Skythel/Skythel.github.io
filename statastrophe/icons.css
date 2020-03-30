@@ -1,0 +1,23 @@
+#hero-icon {
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.icon1 {
+    background: url('icons8-super-mario.svg') no-repeat;
+}
+.icon2 {
+    background: url('icons8-stormtrooper.svg') no-repeat;
+}
+.icon3 {
+    background: url('icons8-iron-man.svg') no-repeat;
+}
+#hero-icon-left {
+    visibility: hidden;
+    vertical-align: middle;
+}
+#hero-icon-right {
+    visibility: hidden;
+    vertical-align: middle;
+}
